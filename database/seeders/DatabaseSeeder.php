@@ -2,24 +2,37 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->command->info('🌱 Memulai proses seeding database Sophia Bridal...');
+        $this->command->newLine();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Urutan ini PENTING karena ada foreign key dependencies
+        $this->call([
+            UserSeeder::class,        // 1. Buat users dulu
+            StaffSeeder::class,       // 2. Profile staff (perlu users)
+            PelangganSeeder::class,   // 3. Profile pelanggan (perlu users)
+            KategoriSeeder::class,    // 4. Kategori (independent)
+            LayananSeeder::class,     // 5. Layanan (perlu kategori)
+            PaketSeeder::class,       // 6. Paket + items (perlu layanan)
+            KoleksiGaunSeeder::class, // 7. Koleksi gaun (independent)
+            JadwalSeeder::class,      // 8. Jadwal (independent)
         ]);
+
+        $this->command->newLine();
+        $this->command->info('🎉 Seeding database SELESAI!');
+        $this->command->newLine();
+        $this->command->table(
+            ['Email Admin', 'Email Staff', 'Email Pelanggan', 'Password'],
+            [
+                ['admin@sophiabridal.com', 'andi@sophiabridal.com', 'siti@example.com', 'password123'],
+                ['', 'ira@sophiabridal.com', 'budi@example.com', ''],
+                ['', 'rina@sophiabridal.com', 'maria@example.com', ''],
+            ]
+        );
     }
 }
