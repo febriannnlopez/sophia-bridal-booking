@@ -2,10 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 
+// =========================================
+// HALAMAN PUBLIK (sementara pakai welcome default)
+// =========================================
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
+// =========================================
+// AUTH (Tailwind + Breeze)
+// =========================================
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

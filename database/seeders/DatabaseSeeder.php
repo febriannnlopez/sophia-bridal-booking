@@ -21,11 +21,14 @@ class DatabaseSeeder extends Seeder
             PaketSeeder::class,       // 6. Paket + items (perlu layanan)
             KoleksiGaunSeeder::class, // 7. Koleksi gaun (independent)
             JadwalSeeder::class,      // 8. Jadwal (independent)
+            GaleriSeeder::class,      // 9. Galeri (independent) — NEW
+            TestimoniSeeder::class,   // 10. Testimoni (perlu users untuk disetujui_oleh) — NEW
         ]);
 
         $this->command->newLine();
         $this->command->info('🎉 Seeding database SELESAI!');
         $this->command->newLine();
+
         $this->command->table(
             ['Email Admin', 'Email Staff', 'Email Pelanggan', 'Password'],
             [
